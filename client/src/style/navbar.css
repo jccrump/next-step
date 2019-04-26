@@ -1,0 +1,42 @@
+.navLink{
+    padding: 0px 10px;
+    text-decoration: none;
+    color: black;
+}
+.navLink:hover{
+    text-decoration: underline;
+}
+
+.logButton{
+    margin-left: auto;
+}
+.logButton input{
+    border: 1px solid #282c34;
+    background-color: white;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 1rem;
+}
+.logo{
+    text-align: left;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    display: inline-block;
+    line-height: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    color: #282c34;
+}
+.navbar{
+    padding: 8px 12px;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    background-color: white;
+}
+body{
+    background-color: #eeeeee;
+    
+}
