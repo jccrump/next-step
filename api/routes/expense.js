@@ -23,7 +23,13 @@ router.get('/expense/:id', (req,res)=>{
 router.post('/addexpense', (req, res)=>{
 
     let newExpense = {
-        project_id: "justin"
+        project_id: req.body.project_id,
+        vendor_id: req.body.vendor_id,
+        type: req.body.type,
+        date: req.body.date,
+        amount_due: req.body.amount_due,
+        payments: [],
+        total_paid: 0
     }
 
 
@@ -32,7 +38,7 @@ router.post('/addexpense', (req, res)=>{
 
     res.redirect('/api/allexpenses')
 })
-
+// Work on this!
 router.put('/expense/:id', (req, res)=>{
     let expense_id = req.params.id
     console.log(expense_id)

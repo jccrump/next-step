@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const expensePaymentSchema = require('./expensePaymentSchema')
 
 let expenseSchema = mongoose.Schema({
     project_id: String,
@@ -6,13 +7,7 @@ let expenseSchema = mongoose.Schema({
     type: String,
     date: Date,
     amount_due: Number,
-    payments: [{
-        payment_id: String,
-        payment_date: Date,
-        trans_type: String,
-        trans_id: String,
-        payment_amt: Number
-    }],
+    payments: [expensePaymentSchema],
     total_paid: Number
 }, {collection: 'expenses'})
 
