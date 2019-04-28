@@ -1,6 +1,6 @@
 import React from "react";
 import InvoiceHeader from './InvoiceHeader'
-import '../style/invoice.css'
+import '../style/search-header.css'
 
 const Invoices = () =>{
     return(

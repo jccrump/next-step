@@ -6,7 +6,7 @@ class InvoiceHeader extends React.Component {
     }
     render() {
         return (
-            <div className="invoice-header">
+            <div className="search-header">
                 <h2>Invoice Feed</h2>
                 <form>
                     <input className="search-bar" placeholder="Find a project..." type="text" />
