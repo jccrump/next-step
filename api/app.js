@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 const expense = require('./routes/expense')
 const customer = require('./routes/customer');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+dotenv.config()
 const port = 5000
 const app = express();
 
-mongoose.connect('mongodb://admin:Slinkey123@ds149146.mlab.com:49146/next-step', { useFindAndModify: false, useNewUrlParser:true})
+mongoose.connect(process.env.DATABASE, { useFindAndModify: false, useNewUrlParser:true})
 
 app.use(bodyParser.urlencoded({extended:true}));
 
