@@ -15,6 +15,7 @@ router.get('/customers', (req, res)=>{
 })
 
 router.post('/addcustomer', (req, res)=>{
+    console.log(req.body)
     let newCustomer = {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
