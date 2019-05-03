@@ -40,3 +40,7 @@ body{
     background-color: #eeeeee;
     
 }
+
+@media screen and (max-width: 600px) {
+    .navbar .navLink {display: none;}
+  }

@@ -15,7 +15,7 @@ class CustomersHeader extends Component {
                 <form>
                     <input className="search-bar" placeholder="Find a customer..." type="text" />
                 </form>
-                <Link to={'/customers/addnew'}>Add New Customer</Link>
+                <Link className="addCustomerLink" to={'/customers/addnew'}>Add New Customer</Link>
             </div>
             <Switch>
               <Route exact path={'/customers'} component={CustomerList} />
