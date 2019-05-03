@@ -36,19 +36,41 @@
     padding: 20px;
     background-color: white;
     border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    
 }
 .customerAddJobWrapper form{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-}
-.customerAddJobWrapper input{
-    padding: 5px;
-    margin-right: 10px;
+    justify-content: space-between;
+    align-items: center;
 }
 .formInput{
     display: flex;
     flex-direction: column;
+}
+.formInput input, select{
+    border: 1px solid gray;
+    padding: 10px;
+    font-size: 14px;
+}
+.customerAddJobWrapper .greenSubmitBtn{
+    width: 100%;
+    align-self: center;
+    font-size: 16px;
+}
+.createNewJobHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.createNewJobHeader .clearBtn{
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
 }
 @media screen and (max-width: 600px) {
     

@@ -14,7 +14,7 @@ router.get('/customers', (req, res)=>{
         })
 })
 
-router.get('/customers/:id', (req, res)=>{
+router.get('/customer/:id', (req, res)=>{
     let customer_id = req.params.id
     
     customerModel.findOne({"_id": customer_id})

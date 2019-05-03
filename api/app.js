@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const expense = require('./routes/expense')
 const customer = require('./routes/customer');
+const projects = require('./routes/projects');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 dotenv.config()
@@ -13,6 +14,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/api', expense)
+app.use('/api', projects)
 app.use('/api', customer)
 
 app.listen(port, ()=>{

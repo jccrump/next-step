@@ -13,7 +13,7 @@ class CustomerList extends Component {
         }
     }
     componentDidMount(){
-      axios('api/customers')
+      axios('/api/customers')
         .then((customers)=>{
           this.setState({
             customers:customers.data,
@@ -29,7 +29,7 @@ class CustomerList extends Component {
     render() {
       
       let customers = this.state.customers.map((customer)=>{
-        return <Link className="customerLink" key={customer._id} to={`/customers/${customer._id}/jobs`}>
+        return <Link className="customerLink" key={customer._id} to={`customer/${customer._id}`}>
                   <Customer 
                       fName={customer.first_name} 
                       lName={customer.last_name}

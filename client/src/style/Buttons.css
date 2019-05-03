@@ -1,0 +1,17 @@
+.greenSubmitBtn{
+    background-color: rgb(61, 180, 67);
+    padding: 10px;
+    border: 0px;
+    border-radius: 3px;
+    margin-top: 5px;
+    color:white;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+}
+.clearBtn{
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+    color: black
+}

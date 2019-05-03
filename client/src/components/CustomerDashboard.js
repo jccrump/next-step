@@ -26,9 +26,8 @@ export default class CustomerDashboard extends Component {
   }
 
   componentDidMount(){
-      axios(`/api/customers/${this.state.customer_id}`)
+      axios(`/api/customer/${this.state.customer_id}`)
           .then((customer)=>{
-              console.log(customer.data.first_name)
               this.setState({
                   first_name : customer.data.first_name,
                   last_name: customer.data.last_name,
@@ -58,12 +57,17 @@ export default class CustomerDashboard extends Component {
               <h1>{this.state.first_name} {this.state.last_name}</h1>
               <h2>{this.state.address}, {this.state.city} {this.state.zip}</h2>
             </div>
-            <Link className="newJobBtn" to={`/customers/${this.state.customer_id}/addjob`}>Create New Job</Link>
+            <Link className="newJobBtn" to={`/customer/${this.state.customer_id}/addProject`}>Create New Project</Link>
           </div>
-          <Switch>
-            <Route path={`/customers/${this.state.customer_id}/addjob`} component={CustomerAddJob} />
-            <Route path={`/customers/${this.state.customer_id}/jobs`} render={()=> <CustomerJobList customer_id={this.state.customer_id} />} />
-          </Switch>
+          <Route path={`/customer/${this.state.customer_id}/addProject`} render={()=> {
+              return  <CustomerAddJob 
+                          customer_id={this.state.customer_id}
+                          first_name={this.state.first_name}
+                          last_name={this.state.last_name}
+                          street_address={this.state.address}
+                          city={this.state.city} />
+              }} 
+          />
           <div>
               <CustomerJob />
           </div>

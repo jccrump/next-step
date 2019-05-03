@@ -15,12 +15,12 @@ class CustomersHeader extends Component {
                 <form>
                     <input className="search-bar" placeholder="Find a customer..." type="text" />
                 </form>
-                <Link className="addCustomerLink" to={'/customers/addnew'}>Add New Customer</Link>
+                <Link className="addCustomerLink" to={'/customer/addnew'}>Add New Customer</Link>
             </div>
             <Switch>
-              <Route exact path={'/customers'} component={CustomerList} />
-              <Route path={'/customers/addnew'} component={CustomerAddNew} />
-              <Route path={'/customers/:id'} component={CustomerDashboard} />
+              <Route exact path={'/customer/'} component={CustomerList} />
+              <Route path={'/customer/addnew'} component={CustomerAddNew} />
+              <Route path={'/customer/:id'} component={CustomerDashboard} />
             </Switch>
         </div>
     )
