@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Customer from './Customer'
+import {Link, Route} from 'react-router-dom'
+
 
 class CustomerList extends Component {
     constructor (props){
@@ -24,13 +26,15 @@ class CustomerList extends Component {
   
     render() {
       let customers = this.state.customers.map((customer)=>{
-        return <Customer 
-                key={customer._id} 
-                fName={customer.first_name} 
-                lName={customer.last_name}
-                street={customer.street_address}
-                city={customer.city}
-                phone={customer.phone}/>
+        return <Link key={customer._id} to={`/customers/${customer._id}`}>
+                  <Customer 
+                      fName={customer.first_name} 
+                      lName={customer.last_name}
+                      street={customer.street_address}
+                      city={customer.city}
+                      phone={customer.phone}/>
+                </Link>
+                
       })
 
       return (

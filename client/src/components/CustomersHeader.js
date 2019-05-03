@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import '../style/search-header.css'
-import {Link, Route} from 'react-router-dom'
+import {Link, Switch, Route} from 'react-router-dom'
 import CustomerAddNew from './CustomerAddNew'
 import CustomerList from './CustomerList'
+import CustomerDashboard from './CustomerDashboard'
 
 
 class CustomersHeader extends Component {
@@ -16,8 +17,11 @@ class CustomersHeader extends Component {
                 </form>
                 <Link to={'/customers/addnew'}>Add New Customer</Link>
             </div>
-            <Route exact path={'/customers'} component={CustomerList} />
-            <Route path={'/customers/addnew'} component={CustomerAddNew} /> 
+            <Switch>
+              <Route exact path={'/customers'} component={CustomerList} />
+              <Route path={'/customers/addnew'} component={CustomerAddNew} />
+              <Route path={'/customers/:id'} component={CustomerDashboard} />
+            </Switch>
         </div>
     )
   }

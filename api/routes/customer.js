@@ -14,6 +14,16 @@ router.get('/customers', (req, res)=>{
         })
 })
 
+router.get('/customers/:id', (req, res)=>{
+    let customer_id = req.params.id
+    
+    customerModel.findOne({"_id": customer_id})
+        .then((customer)=>{
+            res.send(customer)
+        })
+        .catch(err => console.log(err))
+})
+
 router.post('/addcustomer', (req, res)=>{
     console.log(req.body)
     let newCustomer = {
