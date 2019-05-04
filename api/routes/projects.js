@@ -22,7 +22,10 @@ router.post('/addproject', (req, res)=>{
 })
 
 router.get('/projects/:id', (req, res)=>{
-    
+    let customer_id = req.params.id
+    projectModel.find({"customer_id": customer_id})
+        .then(projects => res.send(projects))
+        .catch(err => console.log(err))
 })
 
 router.get('/projects', (req, res)=>{

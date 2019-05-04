@@ -72,6 +72,15 @@
     cursor: pointer;
     outline: none;
 }
+.customerProject{
+    background-color: white;
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 @media screen and (max-width: 600px) {
     
   }

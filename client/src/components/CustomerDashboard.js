@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import '../style/CustomerDashboard.css'
-import CustomerJob from './CustomerJob'
+import CustomerProject from './CustomerProject'
 import {Switch, Route, Link} from 'react-router-dom'
 import CustomerJobList from './CustomerJobList'
 import CustomerAddJob from './CustomerAddJob'
@@ -19,30 +19,50 @@ export default class CustomerDashboard extends Component {
           company_name: null,
           phone: null,
           email: null,
+          projects:[],
           loading: true
       }
 
 
   }
 
-  componentDidMount(){
-      axios(`/api/customer/${this.state.customer_id}`)
-          .then((customer)=>{
-              this.setState({
-                  first_name : customer.data.first_name,
-                  last_name: customer.data.last_name,
-                  address : customer.data.street_address,
-                  city: customer.data.city,
-                  zip: customer.data.zip,
-                  company_name: customer.data.company_name,
-                  phone: customer.data.phone,
-                  email: customer.data.email,
-                  loading: false
+    componentDidMount(){
+        axios(`/api/customer/${this.state.customer_id}`)
+            .then((customer)=>{
+                this.setState({
+                    first_name : customer.data.first_name,
+                    last_name: customer.data.last_name,
+                    address : customer.data.street_address,
+                    city: customer.data.city,
+                    zip: customer.data.zip,
+                    company_name: customer.data.company_name,
+                    phone: customer.data.phone,
+                    email: customer.data.email,
+                    loading: false
               })
           })
+        axios(`/api/projects/${this.state.customer_id}`)
+            .then((projects)=>{
+                this.setState({
+                    projects: projects.data
+                })
+            })    
   }
 
   render() {
+    let projects = this.state.projects.map((project)=>{
+        return (
+            <CustomerProject 
+                key={project._id}
+                project_id={project._id}
+                po_num={project.po_num}
+                pm_id={project.pm_id}
+                street_address={project.street_address}
+                city={project.city}
+                zip={project.zip} />
+        )
+    })
+
     if(this.state.loading){
       return  <div className="customerDashboardWrapper">
                 <div className="customerInfoHeader">
@@ -69,7 +89,7 @@ export default class CustomerDashboard extends Component {
               }} 
           />
           <div>
-              <CustomerJob />
+              {projects}
           </div>
         </div>)
     }
