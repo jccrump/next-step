@@ -1,4 +1,4 @@
-.customerListLoader{
+.listLoader{
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -6,8 +6,4 @@
     max-width: 90%;
     width: 100%;
     text-align: center;
-}
-.customerLink{
-    text-decoration: none;
-    color: #474747;
 }

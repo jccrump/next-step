@@ -41,7 +41,7 @@ export default class CustomerDashboard extends Component {
                     loading: false
               })
           })
-        axios(`/api/projects/${this.state.customer_id}`)
+        axios(`/api/customer/${this.state.customer_id}/projects`)
             .then((projects)=>{
                 this.setState({
                     projects: projects.data
