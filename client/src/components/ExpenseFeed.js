@@ -1,11 +1,11 @@
 import React from "react";
-import InvoiceHeader from './InvoiceHeader'
+import ExpenseHeader from './ExpenseHeader'
 import '../style/search-header.css'
 
 const Invoices = () =>{
     return(
         <div>
-            <InvoiceHeader />
+            <ExpenseHeader />
             {/* <InvoiceFilters />
             <ProjectList /> */}
         </div>

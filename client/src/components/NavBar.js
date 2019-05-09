@@ -19,7 +19,7 @@ class NavBar extends React.Component {
                             <NavLink className="navLink" to="/dashboard">Dashboard</NavLink>
                             <NavLink className="navLink" to="/customer">Customers</NavLink>
                             <NavLink className="navLink" to="/project">Projects</NavLink>
-                            <NavLink className="navLink" to="/invoices">Invoices</NavLink>
+                            <NavLink className="navLink" to="/expense">Expenses</NavLink>
                         </div>
                         <div className="logButton">
                             <input type="button" value={this.state.logStatus} />
