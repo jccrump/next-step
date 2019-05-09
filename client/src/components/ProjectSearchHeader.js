@@ -15,7 +15,7 @@ class ProjectSearchHeader extends Component {
                 <form>
                     <input className="search-bar" placeholder="Find a project..." type="text" />
                 </form>
-                <Link className="addCustomerLink" to={'/customer/addnew'}>Add New Customer</Link>
+                <Link className="addCustomerLink" to={'/customer/addnew'}>Add New Project</Link>
             </div>
             <Switch>
               <Route exact path={'/project/'} component={ProjectList} />

@@ -11,7 +11,7 @@ class CustomersHeader extends Component {
     return (
         <div>
             <div className="search-header">
-                <h2>Customer Feed</h2>
+                <h2>Customers </h2>
                 <form>
                     <input className="search-bar" placeholder="Find a customer..." type="text" />
                 </form>
