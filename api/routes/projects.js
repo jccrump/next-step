@@ -22,7 +22,6 @@ router.get('/project/:id', (req, res)=>{
 
     projectModel.findOne({"_id":project_id})
         .then(project =>{
-            console.log(project)
             res.send(project)
         })
         .catch(err => console.log(err))

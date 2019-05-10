@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const expenseModel = require('../models/expenseModel')
+const projectModel = require('../models/projectModel')
+const mongoose = require('mongoose');
 
 
-router.get('/allexpenses', (req,res)=>{
+
+router.get('/expenses', (req,res)=>{
     expenseModel.find()
         .then((expense)=>{
             res.send(expense)
@@ -35,14 +38,12 @@ router.post('/addexpense', (req, res)=>{
 
     let data = new expenseModel(newExpense);
     data.save();
-
-    res.redirect('/api/allexpenses')
+    res.send('Its worked')
 })
 // Work on this!
 router.put('/expense/:id', (req, res)=>{
     let expense_id = req.params.id
-    console.log(expense_id)
-    console.log(req.body)
+    
     expenseModel.findByIdAndUpdate(expense_id, {$set:{vendor_id:req.body.vendor_id}},{new:true})
         .then((doc)=>{
             if(doc){
