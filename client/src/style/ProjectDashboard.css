@@ -30,6 +30,18 @@
     padding: 10px;
     color: black;
 }
+.projectExpense{
+    background-color: white;
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.projectExpense p{
+    margin: 0px;
+}
 .customerInfoHeader img{
     display: block;
     margin-left: auto;

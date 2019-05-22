@@ -23,6 +23,14 @@ router.get('/expense/:id', (req,res)=>{
             res.send(expense);
         })
 })
+router.get('/project/:id/expenses', (req,res)=>{
+    let projectId = req.params.id;
+
+    expenseModel.find({'project_id':projectId})
+        .then((expenses)=>{
+            res.send(expenses)
+        })
+})
 router.post('/addexpense', (req, res)=>{
 
     let newExpense = {

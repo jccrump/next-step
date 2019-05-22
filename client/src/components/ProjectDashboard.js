@@ -16,12 +16,14 @@ export default class ProjectDashboard extends Component {
             pm_id: null,
             street_address: null,
             city: null,
-            zip: null
+            zip: null,
+            expenses: []
 
         }
     }
 
-    componentDidMount(){
+    componentWillMount(){
+
         axios(`/api/project/${this.state.project_id}`)
             .then(project => {
                 this.setState({
@@ -35,7 +37,14 @@ export default class ProjectDashboard extends Component {
             })
             .catch(err => console.log(err))
     }
-    
+    componentDidMount(){
+        axios(`/api/project/${this.state.project_id}/expenses`)
+            .then(data => {
+                this.setState({
+                    expenses: data.data
+                })
+            })
+    }
     render() {
         return (
         <div className="projectDashboardWrapper">
@@ -54,7 +63,9 @@ export default class ProjectDashboard extends Component {
                 <Link to={`/project/${this.state.project_id}/photos`}>Photos</Link>
             </div>
             <Switch>
-                <Route exact path={`/project/${this.state.project_id}`} component={ProjectExpenses} />
+                <Route exact path={`/project/${this.state.project_id}`} component={()=>{
+                    return <ProjectExpenses expenses={this.state.expenses} />
+                }} />
                 <Route path={`/project/${this.state.project_id}/payments`} component={ProjectPayments} />
                 <Route path={`/project/${this.state.project_id}/documents`} component={ProjectDocuments} />
                 <Route path={`/project/${this.state.project_id}/photos`} component={ProjectPhotos} />

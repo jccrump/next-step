@@ -25,7 +25,7 @@ export default class Expense extends Component {
                 <td><input type="checkbox"></input></td>
                 <td>{this.props.expenseData.type}</td>
                 <td>{this.state.projectData.po_num}</td>
-                <td>{this.state.projectData.po_num}Catherine B.</td>
+                <td>Catherine B.</td>
                 <td>1104 Scenic HIlls Dr</td>
                 <td>Miguel</td>
                 <td>Gutter</td>
