@@ -1,17 +1,18 @@
 import React from "react";
 import '../style/Expense.css'
 import '../style/Buttons.css'
-import {Link, Switch, Route} from 'react-router-dom'
-import ExpenseSortAll from './ExpenseSortAll'
+import {Link, Route} from 'react-router-dom'
 import ExpenseAddNew from './ExpenseAddNew'
 import axios from 'axios'
+import { connect } from 'react-redux'
+
+
 
 class InvoiceHeader extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            "projects":null,
-            "expenses":null
+            "projects":null
         }
     }
     componentDidMount(){
@@ -22,15 +23,6 @@ class InvoiceHeader extends React.Component {
                 })
             })
             .catch(err => console.log(err))
-        
-        axios('/api/expenses')
-            .then(data =>{
-                this.setState({
-                    'expenses': data.data
-                })
-            })
-            .catch(err=> console.log(err))
-        
     }
     render() {
         return (
@@ -44,20 +36,23 @@ class InvoiceHeader extends React.Component {
                 </div>
                 <Route path={'/expense/addnew'} render={()=> <ExpenseAddNew  projects={this.state.projects}/> } />
                 <div className="expense-sort">
-                    <Link className="expense-sort-option sort-active" to={'/expense/all'}>All</Link>
-                    <Link className="expense-sort-option" to={'/expense'}>Pending Review</Link>
-                    <Link className="expense-sort-option" to={'/expense'}>Ready To Pay</Link>
-                    <Link className="expense-sort-option" to={'/expense'}>Ready To File</Link>
-                    <Link className="expense-sort-option" to={'/expense'}>Ready To Reconcile</Link>
-                    <Link className="expense-sort-option" to={'/expense'}>Closed</Link>
+                    <Link className="expense-sort-option sort-active" to={'/expense'}>All</Link>
+                    <Link className="expense-sort-option" to={'/expense/pending'}>Pending Review</Link>
+                    <Link className="expense-sort-option" to={'/expense/readytopay'}>Ready To Pay</Link>
+                    <Link className="expense-sort-option" to={'/expense/readytofile'}>Ready To File</Link>
+                    <Link className="expense-sort-option" to={'/expense/readytoreconcile'}>Ready To Reconcile</Link>
+                    <Link className="expense-sort-option" to={'/expense/closed'}>Closed</Link>
                 </div>
-                <Switch>
-                    <Route exact path={'/expense/all'} render={()=> <ExpenseSortAll expenses={this.state.expenses} />} />
-                </Switch>
+                
             </div>
         )
     }
 }
 
 
-export default InvoiceHeader
+const mapStateToProps = (state) =>{
+    return{
+        expenses: state.expense.expenseList
+    }
+}
+export default connect(mapStateToProps)(InvoiceHeader)

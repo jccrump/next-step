@@ -4,8 +4,17 @@ const initialState = {
 
 const customerReducer = (state = initialState, action) =>{
     let newState = state
+    switch(action.type){    
+        case "GET_CUSTOMERS":
+            return{
+                ...newState,
+                customerList:[...action.payload]
+            }
+        default:
+        return state
+    }
 
-    return state
+    
 }
 
 export default customerReducer

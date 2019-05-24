@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 
 export default class ProjectExpenses extends Component {
-  constructor(props){
-    super(props)
-  }
   render() {
     let expenses = this.props.expenses.map((expense)=>{
       return(

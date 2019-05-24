@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import '../style/CustomerDashboard.css'
 import CustomerProject from './CustomerProject'
-import {Switch, Route, Link} from 'react-router-dom'
-import CustomerJobList from './CustomerJobList'
+import {Route, Link} from 'react-router-dom'
 import CustomerAddJob from './CustomerAddJob'
 
 export default class CustomerDashboard extends Component {
@@ -66,7 +65,7 @@ export default class CustomerDashboard extends Component {
     if(this.state.loading){
       return  <div className="customerDashboardWrapper">
                 <div className="customerInfoHeader">
-                  <img src={ require('../assets/loading.gif')} />
+                  <img alt="Loading" src={ require('../assets/loading.gif')} />
                 </div>
               </div>
     } else {

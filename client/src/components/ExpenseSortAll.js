@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import Expense from './Expense'
-import axios from 'axios'
 
-export default class ExpenseSortAll extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            'projectData':null
-        }
-    }
+class ExpenseSortAll extends Component {
+
   render() {
-    let expenses = this.props.expenses.map((data)=>{
-        return <Expense expenseData={data} />
-        
+    let expenses = []
+  
+    expenses = this.props.expenses.map((expenseData)=>{
+      let projectID = expenseData.project_id
+      let projectData = this.props.projects.filter((project)=> project['_id'] === projectID )
+      if(projectData[0] !== undefined){
+        return <Expense key={expenseData._id} expenseData={expenseData} projectData={projectData[0]}/>
+      }
     })
+    
+    // console.log("ExpenseSortAll", expenses)
     return (
       <div>
         <table className="expense-table">
@@ -31,10 +32,13 @@ export default class ExpenseSortAll extends Component {
             </tr>
             </thead>
             <tbody>
-                {expenses}
+              {expenses === []?'<div>No invoices</div>':expenses}
             </tbody>
         </table>
       </div>
     )
   }
 }
+
+
+export default ExpenseSortAll

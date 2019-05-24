@@ -1,44 +1,30 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import {Link} from 'react-router-dom'
 import ListResult from './ListResult'
 import '../style/Loading.css'
 import '../style/SearchResults.css'
+import {connect} from 'react-redux'
 
-export default class ProjectList extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            projects: [],
-            isLoading: true
-        }
-    }
 
-    componentDidMount(){
-        axios('/api/projects')
-            .then(projects =>{
-                this.setState({
-                    projects: projects.data,
-                    isLoading: false
-                })
-            })
-    }
-
+class ProjectList extends Component {
     render() {
-        let projects = this.state.projects.map((project)=>{
+        let projects = this.props.projects.map((project)=>{
             return  <Link className="resultLink" key={project._id} to={`/project/${project._id}`}>
                         <ListResult data={project}/>    
                     </Link>
         })
-
-        if(this.state.isLoading){
-            return <div className="listLoader"><img src={ require('../assets/loading.gif')} /></div>
-        } else {
-            return (
-                <div>
-                    {projects}
-                </div>
-            )
-        }
+        return(
+            <div>{projects}</div>
+        )
     }
 }
+
+
+const mapStateToProps = (state) =>{
+    return {
+        projects: state.project.projectList
+    }
+}
+
+
+export default connect(mapStateToProps)(ProjectList)
