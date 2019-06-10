@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import * as customerActions from './actions/customer.actions'
 import * as expenseActions from './actions/expense.actions'
 import * as projectActions from './actions/project.actions'
+import * as vendorActions from './actions/vendor.actions'
 import './App.css';
 import './style/form.css'
 
@@ -19,6 +20,7 @@ class App extends React.Component{
     this.props.getCustomers()
     this.props.getExpenses()
     this.props.getProjects()
+    this.props.getVendors()
   }
 
   render(){
@@ -52,7 +54,8 @@ const mapStateToProps = (state) =>{
   return{
       customers: [...state.customer.customerList],
       expenses: [...state.expense.expenseList],
-      projects: [...state.project.projectList]
+      projects: [...state.project.projectList],
+      vendors: [...state.vendor.vendorList]
   }
 }
 
@@ -60,7 +63,8 @@ const mapDispatchToProps = (dispatch) =>{
   return {
       getCustomers: () => dispatch(customerActions.fetchCustomers()),
       getExpenses: () => dispatch(expenseActions.fetchExpenses()),
-      getProjects: () => dispatch(projectActions.fetchProjects())
+      getProjects: () => dispatch(projectActions.fetchProjects()),
+      getVendors: ()=> dispatch(vendorActions.fetchVendors())
   }
 }
 

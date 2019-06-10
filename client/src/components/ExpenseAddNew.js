@@ -17,7 +17,6 @@ export default class ExpenseAddNew extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
     }
-    com
     componentDidMount(){
         if(this.props.projects != null){
             this.setState({
@@ -50,52 +49,56 @@ export default class ExpenseAddNew extends Component {
     }
     render() {
         
+        if(this.state.show !== false){
+            return (
+                <div className="expense-addnew-form-wrapper">
+                    <div className="expense-addnew-header">
+                        <h3>Add New Expense</h3>
+                        <button className="clearBtn" onClick={this.props.close}>&#10006;</button>
+                    </div>
+                    <form className="expense-addnew-form" onSubmit={this.handleSubmit}>
+                        <label className="formInput" for="type">
+                        Expense Type:
+                        <select onChange={this.handleInputChange} name="type">
+                            <option value=""></option>
+                            <option value="Labor">Labor</option>
+                            <option value="Material">Material</option>
+                            <option value="Permit">Permit</option>
+                            <option value="Misc">Misc.</option>
+                        </select>
+                        </label>
+                        <label className="formInput" for="project_id">
+                        Project:
+                        <select onChange={this.handleInputChange} name="project_id">
+                            <option value=""></option>
+                            {this.state.projects}
+                        </select>
+                        </label>
+                        <label className="formInput" for="vendor_id">
+                        Vendor:
+                        <select onChange={this.handleInputChange} name="vendor_id">
+                            <option value=""></option>
+                            <option value="5ceabbc8477af23620ce09de">Miguel H.</option>
+                        </select>
+                        </label>
+                        <label className="formInput" for="trade">
+                        Trade:
+                        <select onChange={this.handleInputChange} name="trade">
+                            <option value=""></option>
+                            <option value="Roof">Roof</option>
+                        </select>
+                        </label>
+                        <label className="formInput" for="amount_due">
+                        Amount:
+                        <input onChange={this.handleInputChange} type="number" step=".01" name="amount_due"/>
+                        </label>
+                        <button type="submit" className="greenSubmitBtn" >Add Expense</button>
+                    </form>
+                </div>
+            )
+        } else{
+            return <div></div>
+        }
         
-        return (
-        <div className="expense-addnew-form-wrapper">
-            <div className="expense-addnew-header">
-                <h3>Add New Expense</h3>
-                <Link className="clearBtn" to={`/expense`}>&#10006;</Link>
-            </div>
-            <form className="expense-addnew-form" onSubmit={this.handleSubmit}>
-                <label className="formInput" for="type">
-                Expense Type:
-                <select onChange={this.handleInputChange} name="type">
-                    <option value=""></option>
-                    <option value="Labor">Labor</option>
-                    <option value="Material">Material</option>
-                    <option value="Permit">Permit</option>
-                    <option value="Misc">Misc.</option>
-                </select>
-                </label>
-                <label className="formInput" for="project_id">
-                Project:
-                <select onChange={this.handleInputChange} name="project_id">
-                    <option value=""></option>
-                    {this.state.projects}
-                </select>
-                </label>
-                <label className="formInput" for="vendor_id">
-                Vendor:
-                <select onChange={this.handleInputChange} name="vendor_id">
-                    <option value=""></option>
-                    <option value="2589">Miguel H.</option>
-                </select>
-                </label>
-                <label className="formInput" for="trade">
-                Trade:
-                <select onChange={this.handleInputChange} name="trade">
-                    <option value=""></option>
-                    <option value="Roof">Roof</option>
-                </select>
-                </label>
-                <label className="formInput" for="amount_due">
-                Amount:
-                <input onChange={this.handleInputChange} type="number" step=".01" name="amount_due"/>
-                </label>
-                <button type="submit" className="greenSubmitBtn" >Add Expense</button>
-            </form>
-        </div>
-    )
   }
 }

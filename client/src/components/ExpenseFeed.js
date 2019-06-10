@@ -4,6 +4,8 @@ import '../style/search-header.css'
 import { Switch, Route} from 'react-router-dom'
 import ExpenseSortAll from './ExpenseSortAll'
 import {connect} from 'react-redux'
+import ExpenseDashboard from './ExpenseDashboard'
+import ExpenseLinks from './ExpeneseLinks'
 
 class Invoices extends React.Component {
     render(){
@@ -11,7 +13,9 @@ class Invoices extends React.Component {
             <div>
                 <ExpenseHeader />
                 <Switch>
-                    <Route exact path={'/expense'} render={()=> <ExpenseSortAll expenses={this.props.expenses} projects={this.props.projects}/>} />
+                    <Route exact path={'/expense'} render={()=> <div><ExpenseLinks /><ExpenseSortAll expenses={this.props.expenses} vendors={this.props.vendors} projects={this.props.projects}/></div>} />
+                    <Route path={'/expense/pending'} render={()=> <div><ExpenseLinks /><ExpenseSortAll expenses={this.props.expenses} vendors={this.props.vendors} projects={this.props.projects}/></div>} />
+                    <Route path={'/expense/:id'} component={ExpenseDashboard} />
                 </Switch>
             </div>
         )
@@ -21,7 +25,8 @@ class Invoices extends React.Component {
 const mapStateToProps = (state) =>{
     return{
         expenses: [...state.expense.expenseList],
-        projects: [...state.project.projectList]
+        projects: [...state.project.projectList],
+        vendors: [...state.vendor.vendorList]
     }
 }
 
