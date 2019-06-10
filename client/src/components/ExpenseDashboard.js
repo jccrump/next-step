@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import '../style/ExpenseDashboard.css'
 
@@ -8,7 +7,7 @@ class ExpenseDashboard extends Component {
     render() {
         let expenseData = this.props.expenses.filter((expense) => expense._id === this.props.match.params.id)
         expenseData = expenseData[0]
-        console.log(expenseData)
+        
         if(expenseData !== undefined){
             return (
                 <div className='expenseDashboardWrapper'>

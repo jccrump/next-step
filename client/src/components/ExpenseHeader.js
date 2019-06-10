@@ -1,7 +1,6 @@
 import React from "react";
 import '../style/Expense.css'
 import '../style/Buttons.css'
-import {Link, Route} from 'react-router-dom'
 import ExpenseAddNew from './ExpenseAddNew'
 import axios from 'axios'
 import { connect } from 'react-redux'

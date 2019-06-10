@@ -12,14 +12,14 @@ class ExpenseSortAll extends Component {
       let projectID = expenseData.project_id
       let projectData = this.props.projects.filter((project)=> project['_id'] === projectID )
       let vendorData = this.props.vendors.filter((vendor)=> vendor['_id'] === expenseData.vendor_id)
-      if(projectData[0] !== undefined && vendorData[0] !==undefined){
+      if(projectData[0] !== undefined && vendorData[0] !== undefined){
         return <Expense key={expenseData._id} expenseData={expenseData} vendorData={vendorData[0]} projectData={projectData[0]}/>
       }
     })
     
     // console.log("ExpenseSortAll", expenses)
-    if(expenses.length == 0){
-      return <div className='listLoader'><img src={require('../assets/loading.gif')} /></div>
+    if(expenses.length === 0){
+      return <div className='listLoader'><img alt='Loading...' src={require('../assets/loading.gif')} /></div>
     } else{
       return (
         <div>
