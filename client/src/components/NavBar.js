@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import '../style/navbar.css'
 
 
@@ -12,10 +12,13 @@ class NavBar extends React.Component {
         }
     }
     render(){
+        const settingStyle = {
+            marginRight: '5px'
+        }
         return(
                 <header>
                     <nav className="navbar">
-                        <NavLink to="/" className="logo" href="#">NEXTSTEP</NavLink>
+                        <NavLink to="/" className="logo" href="#">KRONOS</NavLink>
                         <div className="navlinks">
                             <NavLink className="navLink" to="/dashboard">Dashboard</NavLink>
                             <NavLink className="navLink" to="/customer">Customers</NavLink>
@@ -23,6 +26,7 @@ class NavBar extends React.Component {
                             <NavLink className="navLink" to="/expense">Expenses</NavLink>
                         </div>
                         <div className="logButton">
+                            <Link to='/Settings'>Settings</Link>
                             <input type="button" value={this.state.logStatus} />
                         </div>
                     </nav>

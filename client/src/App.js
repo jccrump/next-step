@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Dashboard from './components/Dashboard'
 import ProjectFeed from './components/ProjectFeed'
 import CustomersFeed from './components/CustomersFeed'
+import Settings from './components/Settings'
 import { connect } from 'react-redux'
 import * as customerActions from './actions/customer.actions'
 import * as expenseActions from './actions/expense.actions'
@@ -35,6 +36,7 @@ class App extends React.Component{
               <Route path="/customer" component={CustomersFeed}/>
               <Route path="/project" component={ProjectFeed}/>
               <Route path="/expense" component={ExpenseFeed}/>
+              <Route path="/settings" component={Settings}/>
             </Switch>
           </div>
         </BrowserRouter>

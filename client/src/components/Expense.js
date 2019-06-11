@@ -13,7 +13,7 @@ export default class Expense extends Component {
                 <td>{this.props.vendorData.first_name} {this.props.vendorData.last_name}</td>
                 <td>{this.props.expenseData.type}</td>
                 <td>{this.props.expenseData.amount_due}</td>
-                <td>Ready To Pay</td>
+                <td>{this.props.expenseData.status}</td>
                 <td width='5%'><Link to={`/expense/${this.props.expenseData._id}`}>See Details</Link></td>
             </tr>
             

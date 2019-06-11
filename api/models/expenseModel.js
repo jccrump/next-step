@@ -4,6 +4,7 @@ const expensePaymentSchema = require('./expensePaymentSchema')
 let expenseSchema = mongoose.Schema({
     project_id: String,
     vendor_id: String,
+    status: String,
     type: String,
     date: Date,
     amount_due: Number,

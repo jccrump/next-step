@@ -13,7 +13,7 @@ class Invoices extends React.Component {
             <div>
                 <ExpenseHeader />
                 <Switch>
-                    <Route exact path={'/expense'} render={()=> <div><ExpenseLinks /><ExpenseSortAll expenses={this.props.expenses} vendors={this.props.vendors} projects={this.props.projects}/></div>} />
+                    <Route exact path={'/expense'} render={()=> <div><ExpenseLinks /><ExpenseSortAll /></div>} />
                     <Route path={'/expense/pending'} render={()=> <div><ExpenseLinks /><ExpenseSortAll expenses={this.props.expenses} vendors={this.props.vendors} projects={this.props.projects}/></div>} />
                     <Route path={'/expense/:id'} component={ExpenseDashboard} />
                 </Switch>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Expense from './Expense'
+import {connect} from 'react-redux'
 import '../style/Loading.css'
 
 
@@ -46,5 +47,12 @@ class ExpenseSortAll extends Component {
   }
 }
 
+const mapStateToProps = (state) =>{
+  return{
+      expenses: [...state.expense.expenseList],
+      projects: [...state.project.projectList],
+      vendors: [...state.vendor.vendorList]
+  }
+}
 
-export default ExpenseSortAll
+export default connect(mapStateToProps)(ExpenseSortAll)

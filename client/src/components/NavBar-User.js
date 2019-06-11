@@ -12,7 +12,6 @@ class NavBar extends React.Component {
     render(){
         return(
                 <div>
-                    <img />
                     <button value="Logout"/>
 
                 </div>
