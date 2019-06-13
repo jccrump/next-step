@@ -6,5 +6,37 @@
     margin-right: auto;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, .2);
     background-color: white;
+}
+.topDashboard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid lightgray;
     padding: 20px;
 }
+.topRightDashboard{
+    text-align: right;
+}
+.paymentWrapper{
+    padding: 20px;
+    border-bottom: 1px solid lightgray;
+}
+.paymentTable{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+.paymentTable th, .paymentTable td{
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+}
+@media screen and (max-width: 600px) {
+    .topDashboard{
+        flex-direction: column
+    }
+    .topRightDashboard, .topLeftDashboard{
+        text-align: center;
+    }
+  }
