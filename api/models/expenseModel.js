@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 const expensePaymentSchema = require('./expensePaymentSchema')
+const expenseApprovalStatusSchema = require('./expenseApprovalStatusModel')
 
 let expenseSchema = mongoose.Schema({
     project_id: String,
     vendor_id: String,
+    approval_status: {
+        status: String,
+        date: String
+    },
     status: String,
     type: String,
     date: Date,

@@ -15,6 +15,8 @@ class ExpenseSortAll extends Component {
       let vendorData = this.props.vendors.filter((vendor)=> vendor['_id'] === expenseData.vendor_id)
       if(projectData[0] !== undefined && vendorData[0] !== undefined){
         return <Expense key={expenseData._id} expenseData={expenseData} vendorData={vendorData[0]} projectData={projectData[0]}/>
+      } else{
+        return null
       }
     })
     

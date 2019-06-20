@@ -22,7 +22,6 @@
 }
 .projectCollections a{
     border: 1px solid #eee;
-
     background-color: white;
     width: 100%;
     text-align: center;
@@ -32,12 +31,21 @@
 }
 .projectExpense{
     background-color: white;
+    border: 3px solid white;
     border-bottom: 1px solid #eee;
     padding: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    text-decoration: none;
+    color: black;
+}
+.projectExpense:last-child{
+    border-bottom: 3px solid white;
+}
+.projectExpense:hover{
+    border: 3px dashed lightblue;
 }
 .projectExpense p{
     margin: 0px;
@@ -97,6 +105,7 @@
     justify-content: space-between;
     align-items: center;
 }
+
 @media screen and (max-width: 600px) {
     
   }

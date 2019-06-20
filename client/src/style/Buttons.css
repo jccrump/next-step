@@ -27,3 +27,44 @@
     padding: 10px;
     text-decoration: none;
 }
+.greenButton{
+    background-color: #42b539;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    border: 0px;
+    text-decoration: none;
+}
+.yellowButton{
+    background-color: #e5e527;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    border: 0px;
+    text-decoration: none;
+}
+
+.redButton{
+    background-color: #e85151;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    border: 0px;
+    text-decoration: none;
+}
+.buttonHolder{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 220px;
+    width: 100%;
+}

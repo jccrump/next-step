@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import '../style/Buttons.css'
 import '../style/ExpenseDashboard.css'
 import ExpenseAddPayment from './ExpenseAddPayment'
-
+import ExpenseDashboardButton from './ExpenseDashboardButton'
 
 class ExpenseDashboard extends Component {
     constructor(props){
@@ -26,27 +26,38 @@ class ExpenseDashboard extends Component {
         }
 
     }
+    
     render() {
-        let expenseData, vendorData, projectData
+        let expenseData, vendorData, projectData, paymentAmounts, paymentsTotal, payments
         try {
             expenseData = this.props.expenses.filter((expense) => expense._id === this.props.match.params.id)[0]
             vendorData = this.props.vendors.filter((vendor=> vendor._id === expenseData.vendor_id))[0]
             projectData = this.props.projects.filter((project) => project._id === expenseData.project_id)[0]
-            let paymentAmounts = expenseData.payments.map((payment) => payment.amount)
-            let paymentsTotal = paymentAmounts.reduce((total, payment)=> total + payment)
             
-            
-            let payments = expenseData.payments.map((payment) => {
-                return (
-                    <tr key={payment.payment_id}>
-                        <td>{payment.payment_id}</td>
-                        <td><input type="date" value={payment.date} disabled/></td>
-                        <td>{payment.type}</td>
-                        <td>{payment.trans_num}</td>
-                        <td>$ {parseFloat(payment.amount).toFixed(2)}</td>
+            if((expenseData.payments).length === 0){
+                paymentsTotal = 0
+                payments = [
+                    <tr>
+                        <td colSpan="5"><span role='img' aria-label="Money">💵</span> No payments made yet. <span role='img' aria-label="Money Bag">💰</span></td>
                     </tr>
-                )
-            })
+                ]
+            } else{
+                paymentAmounts = expenseData.payments.map((payment) => payment.amount)
+                paymentsTotal = paymentAmounts.reduce((total, payment)=> total + payment)
+                payments = expenseData.payments.map((payment) => {
+                    return (
+                        <tr key={payment.id}>
+                            <td>{payment.id}</td>
+                            <td><input type="date" value={payment.date} disabled/></td>
+                            <td>{payment.type}</td>
+                            <td>{payment.trans_num}</td>
+                            <td>$ {parseFloat(payment.amount).toFixed(2)}</td>
+                        </tr>
+                    )
+                })
+            }
+            
+            
             return (
                 <div className='expenseDashboardWrapper'>
                     <div className='topDashboard'>
@@ -55,23 +66,23 @@ class ExpenseDashboard extends Component {
                             <h3>PO#: {projectData.po_num}</h3>
                             <h3>{vendorData.first_name} {vendorData.last_name}</h3>
                             <h3>{projectData.street_address}</h3>
-                            <button onClick={() => this.handleAddPaymentClick()} className="addButton">Add Payment</button>
+                            <ExpenseDashboardButton approvalStatus={expenseData.approval_status.status} expenseID={expenseData._id} handleAddPaymentClick={this.handleAddPaymentClick} status={expenseData.status}/>
                         </div>
 
                         <div className='topRightDashboard'>
                             {/* Invoice Status */}
-                            <h2>Ready to Pay</h2>
+                            <h2>{expenseData.status}</h2>
                             {/* Arrpoval Satus */}
                             <h3> Approved by : Catherine B.</h3>
                             
                             <h4>Total: ${parseFloat(expenseData.amount_due).toFixed(2)}</h4>
                             <h4>Payments: ${parseFloat(paymentsTotal).toFixed(2)}</h4>
-                            <h4>Balance: $1200.00</h4>
+                            <h4>Balance: ${(parseFloat(expenseData.amount_due).toFixed(2) - parseFloat(paymentsTotal).toFixed(2)).toFixed(2)}</h4>
                             
                             
                         </div>
                     </div>
-                    {this.state.showAddPayment && <ExpenseAddPayment />}
+                    {this.state.showAddPayment && <ExpenseAddPayment handleAddPaymentClick={this.handleAddPaymentClick} expenseID = {expenseData._id} />}
                     <table className="paymentTable">
                         <thead>
                             <tr>
@@ -94,9 +105,9 @@ class ExpenseDashboard extends Component {
         } catch (error) {
             console.log(error)
             return (
-                <div>
-                    Loading...
-                </div>
+                
+                <center><strong><h3>Something went wrong check console for more information.</h3></strong></center>
+                
             )
         }
         

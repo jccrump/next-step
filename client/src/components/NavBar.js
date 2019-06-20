@@ -12,9 +12,6 @@ class NavBar extends React.Component {
         }
     }
     render(){
-        const settingStyle = {
-            marginRight: '5px'
-        }
         return(
                 <header>
                     <nav className="navbar">

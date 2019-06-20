@@ -64,6 +64,56 @@ router.put('/expense/:id', (req, res)=>{
             console.log(err)
         })
 })
+router.post('/expense/:id/changestatus', (req, res)=>{
+    let expense_id = req.params.id
+
+    console.log(expense_id, req.body.status)
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+
+    expenseModel.findByIdAndUpdate(expense_id,{
+        $set:{
+            approval_status:{
+                status: req.body.status,
+                date: today
+            }
+        }
+    }, {safe: true, upsert: true})
+    .then((doc)=>{
+        if(doc){
+            res.send({"success": true, data:doc})
+        } else{
+            res.send({"success": false, data:doc})
+        }
+    })
+    .catch(err => err && console.log(err))
+})
+router.post('/expense/:id/addpayment', (req, res)=>{
+    let expense_id = req.params.id
+    
+    expenseModel.findByIdAndUpdate(expense_id, {
+        $push:{"payments":{
+            id:'2',
+            date: req.body.date,
+            type: req.body.type,
+            trans_num: req.body.trans_num,
+            amount: req.body.amount
+        }}
+    }, {safe: true, upsert: true})
+    .then((doc)=>{
+        if(doc){
+            res.send({"success": true, data:doc})
+        } else{
+            res.send({"success": false, data:doc})
+        }
+    })
+    .catch(err => err && console.log(err))
+})
 
 router.delete('/expense/:id', (req, res)=>{
     let expense_id = req.params.id;
