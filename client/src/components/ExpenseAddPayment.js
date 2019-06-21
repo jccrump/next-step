@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import '../style/Expense.css'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import * as expenseActions from '../actions/expense.actions'
 
-export default class ExpenseAddPayment extends Component {
+class ExpenseAddPayment extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -29,10 +31,11 @@ export default class ExpenseAddPayment extends Component {
                 this.setState({
                     postSuccess: true
                 })
+                this.props.fetchExpenses()
             }
             setTimeout(()=>{
-                this.props.showAddPayment()
-            }, 3000)
+                this.props.handleAddPaymentClick()
+            }, 2000)
             
         })
         .catch(err => err && console.log(err))
@@ -82,3 +85,9 @@ export default class ExpenseAddPayment extends Component {
         
     }
 }
+
+const mapDispatchToProps = {
+    fetchExpenses : expenseActions.fetchExpenses
+}
+
+export default connect(null, mapDispatchToProps)(ExpenseAddPayment)

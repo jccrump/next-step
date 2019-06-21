@@ -10,7 +10,7 @@ const expenseReducer = (state = initialState, action) =>{
                 ...newState,
                 expenseList: [...action.payload]
             }
-        case 'SET_APPROVAL_STATUS':
+        case 'UPDATE_EXPENSE':
             let newExpenseList = newState.expenseList.filter((expense)=> expense._id !== action.payload._id)
             newExpenseList.push(action.payload)
             
@@ -19,6 +19,7 @@ const expenseReducer = (state = initialState, action) =>{
                 expenseList: [...newExpenseList]
                 
             }
+
         default:
             return state
     }

@@ -16,9 +16,20 @@ export function setApprovalStatus(status, id){
 
   return dispatch => {
     request.then(({data})=>{
-      data.data.approval_status.status = status
-      dispatch({type:'SET_APPROVAL_STATUS', payload:data.data})
+      dispatch({type:'UPDATE_EXPENSE', payload:data.data})
     })
   }
  
+}
+export function setFileStatus(status, id){
+  const request = axios.post(`/api/expense/${id}/changefilestatus`, {
+    expenseID: id,
+    fileLocation: status
+  })
+
+  return dispatch => {
+    request.then((data) => {
+      dispatch({type:'UPDATE_EXPENSE', payload:data.data.data})
+    })
+  }  
 }

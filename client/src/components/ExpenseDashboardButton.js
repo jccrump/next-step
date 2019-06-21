@@ -3,15 +3,20 @@ import { connect } from 'react-redux'
 import * as expenseActions from '../actions/expense.actions'
 
 class ExpenseDashboardButton extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            folder:''
+        }
+    }
     render() {
         switch (this.props.status){
-            case 'Pending Review':
+            case 'Pending Approval':
                 return (
                     <div className="buttonHolder">
-                        <p>{this.props.approvalStatus}</p>
-                        <button onClick={() => this.props.setApprovalStatus('APPROVED', this.props.expenseID)} className="greenButton">Approve</button>
-                        <button onClick={() => this.props.setApprovalStatus('HOLD', this.props.expenseID)} className="yellowButton">Hold</button>
-                        <button onClick={() => this.props.setApprovalStatus('DENIED', this.props.expenseID)} className="redButton">Deny</button>
+                        <button onClick={() => this.props.setApprovalStatus('Approved', this.props.expenseID)} className="greenButton">Approve</button>
+                        <button onClick={() => this.props.setApprovalStatus('Hold', this.props.expenseID)} className="yellowButton">Hold</button>
+                        <button onClick={() => this.props.setApprovalStatus('Denied', this.props.expenseID)} className="redButton">Deny</button>
                     </div>
                 )
             case 'Ready to Pay':
@@ -20,14 +25,19 @@ class ExpenseDashboardButton extends Component {
                 )
             case 'Ready to File':
                 return(
-                    <div>
-                        Ready to File
+                    <div className="buttonHolder">
+                        <select onChange={(e)=>this.setState({folder:e.target.value})}>
+                            <option></option>
+                            <option value="Customers Folder">Customer Folder</option>
+                            <option value="Missed Labor">Missed Labor</option>
+                        </select>
+                        <button onClick={() => this.props.setFileStatus(this.state.folder, this.props.expenseID)} className="addButton">File</button>
                     </div>
                 )
             case 'Ready to Reconcile':
                 return(
                     <div>
-                        Ready to Reconcile
+                        <button className="addButton"><span>☑</span> Reconcile</button>
                     </div>
                 )
             case 'Closed':
@@ -44,7 +54,9 @@ class ExpenseDashboardButton extends Component {
 
 const mapDispatchToProps = {
 
-        setApprovalStatus: expenseActions.setApprovalStatus
+        setApprovalStatus: expenseActions.setApprovalStatus,
+        setFileStatus: expenseActions.setFileStatus
+
 }
 
 export default connect(null, mapDispatchToProps)(ExpenseDashboardButton)

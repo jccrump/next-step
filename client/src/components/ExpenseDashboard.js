@@ -4,6 +4,9 @@ import '../style/Buttons.css'
 import '../style/ExpenseDashboard.css'
 import ExpenseAddPayment from './ExpenseAddPayment'
 import ExpenseDashboardButton from './ExpenseDashboardButton'
+import * as expenseActions from '../actions/expense.actions'
+import axios from 'axios';
+
 
 class ExpenseDashboard extends Component {
     constructor(props){
@@ -23,8 +26,25 @@ class ExpenseDashboard extends Component {
             this.setState({
                 'showAddPayment': false
             })
+            this.props.fetchExpenses()
+
         }
 
+    }
+    handleRemovePaymentClick = (paymentID, paymentAmount, expenseID) => {
+        axios.post(`/api/expense/${expenseID}/removepayment`,{
+            paymentID: paymentID,
+            paymentAmount: paymentAmount
+        })
+        .then((doc)=>{
+            this.props.fetchExpenses()
+            if(doc){
+                console.log(doc)
+            } else {
+                console.log('Nothing')
+            }
+        })
+        .catch(err => err && console.log(err))
     }
     
     render() {
@@ -52,6 +72,7 @@ class ExpenseDashboard extends Component {
                             <td>{payment.type}</td>
                             <td>{payment.trans_num}</td>
                             <td>$ {parseFloat(payment.amount).toFixed(2)}</td>
+                            <td><button className="clearButton" onClick={() => this.handleRemovePaymentClick(payment.id, payment.amount, expenseData._id)}>❌</button></td>
                         </tr>
                     )
                 })
@@ -68,12 +89,12 @@ class ExpenseDashboard extends Component {
                             <h3>{projectData.street_address}</h3>
                             <ExpenseDashboardButton approvalStatus={expenseData.approval_status.status} expenseID={expenseData._id} handleAddPaymentClick={this.handleAddPaymentClick} status={expenseData.status}/>
                         </div>
-
                         <div className='topRightDashboard'>
                             {/* Invoice Status */}
                             <h2>{expenseData.status}</h2>
                             {/* Arrpoval Satus */}
-                            <h3> Approved by : Catherine B.</h3>
+                            <h3> Approval Status : {expenseData.approval_status.status}</h3>
+                            <h3>{expenseData.filing_status.status ? `Filed in ${expenseData.filing_status.location}` : 'Not Filed'}</h3>
                             
                             <h4>Total: ${parseFloat(expenseData.amount_due).toFixed(2)}</h4>
                             <h4>Payments: ${parseFloat(paymentsTotal).toFixed(2)}</h4>
@@ -91,6 +112,7 @@ class ExpenseDashboard extends Component {
                                 <th>Type</th>
                                 <th>Transaction #</th>
                                 <th>Amount</th>
+                                <th width="150"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -124,4 +146,8 @@ const mapStateToProps = (state) =>{
     }
   }
 
-export default connect(mapStateToProps)(ExpenseDashboard)
+const mapDispatchToProps = {
+    fetchExpenses : expenseActions.fetchExpenses
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseDashboard)

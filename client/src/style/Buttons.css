@@ -9,11 +9,12 @@
     text-decoration: none;
     font-weight: 600;
 }
-.clearBtn{
+.clearButton{
     background-color: transparent;
     border: none;
     text-decoration: none;
-    color: black
+    color: black;
+    cursor: pointer;
 }
 .addButton{
     margin-left: auto;
