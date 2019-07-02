@@ -16,6 +16,10 @@
     border-bottom: 1px solid lightgray;
     padding: 20px;
 }
+.bottomDashboard{
+    display: flex;
+    flex-direction: row;
+}
 .topRightDashboard{
     text-align: right;
 }
@@ -31,6 +35,71 @@
 .paymentTable th, .paymentTable td{
     border-bottom: 1px solid lightgray;
     padding: 10px;
+}
+.paymentTableWrapper{
+    max-width: 60%;
+    width: 100%
+}
+.expenseNotesWrapper{
+    width: 40%;
+    max-height: 400px;
+    height: 100%;
+    border-left: 1px solid lightgray;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.expenseNotesWrapper table tr{
+    border: 1px solid lightgray;
+}
+.expenseNotesList{
+    width: 100%;
+    list-style: none;
+    padding: 0px;
+    overflow: auto;
+}
+.expenseNote{
+    background-color: rgb(218, 246, 255);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.expenseNotesTitle{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center
+}
+.expenseNotesTitle h3{
+    margin: 0;
+}
+.expenseNotesTitle button{
+    height: 50px;
+}
+.expenseNoteForm{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.expenseNoteForm textarea{
+    width: 90%;
+}
+.expenseNoteForm button{
+    margin: 0;
+    width: 92%;
+    font-size: 12px;
+}
+.noteBody{
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+.noteDate, .noteUser{
+    font-size: 12px;
 }
 @media screen and (max-width: 600px) {
     .topDashboard{

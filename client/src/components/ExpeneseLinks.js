@@ -1,20 +1,32 @@
 import React from "react";
 import '../style/Expense.css'
 import '../style/Buttons.css'
-import {Link} from 'react-router-dom'
+import ExpenseSortAll from "./ExpenseSortAll";
 
 
 class ExpenseLinks extends React.Component{
+    constructor(props){
+        super(props)
+        this.state ={
+            filter:"Closed"
+        }
+    }
+    handleClickFilter = (e) => {
+        this.setState({filter:e.target.value})
+    }
     render(){
         return(
+        <div>
             <div className="expense-sort">
-                    <Link className="expense-sort-option sort-active" to={'/expense'}>All</Link>
-                    <Link className="expense-sort-option" to={'/expense/pending'}>Pending Review</Link>
-                    <Link className="expense-sort-option" to={'/expense/readytopay'}>Ready To Pay</Link>
-                    <Link className="expense-sort-option" to={'/expense/readytofile'}>Ready To File</Link>
-                    <Link className="expense-sort-option" to={'/expense/readytoreconcile'}>Ready To Reconcile</Link>
-                    <Link className="expense-sort-option" to={'/expense/closed'}>Closed</Link>
-                </div>
+                <button className="expense-sort-option" onClick={this.handleClickFilter} value='All'>All</button>
+                <button className="expense-sort-option" onClick={this.handleClickFilter} value="Pending Review">Pending Review</button>
+                <button className="expense-sort-option" onClick={this.handleClickFilter} value="Ready to Pay">Ready to Pay</button>
+                <button className="expense-sort-option" onClick={this.handleClickFilter} value="Ready to File">Ready to File</button>
+                <button className="expense-sort-option" onClick={this.handleClickFilter} value="Ready to Reconcile">Ready to Reconcile</button>
+                <button className="expense-sort-option"onClick={this.handleClickFilter} value="Closed">Closed</button>
+            </div>
+            <ExpenseSortAll filter={this.state.filter} />
+        </div>
         )
     }
 }

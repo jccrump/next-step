@@ -6,6 +6,7 @@ export default class Expense extends Component {
         return (
             
             <tr>
+                <td></td>
                 <td>{this.props.expenseData.type}</td>
                 <td>{this.props.projectData.po_num}</td>
                 <td>Catherine B.</td>

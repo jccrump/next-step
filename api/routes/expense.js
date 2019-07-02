@@ -129,6 +129,36 @@ router.post('/expense/:id/changestatus', (req, res)=>{
     })
     .catch(err => err && console.log(err))
 })
+
+router.post('/expense/:id/reconcile', (req, res)=>{
+    let expense_id = req.params.id
+
+    expenseModel.findByIdAndUpdate(expense_id, {
+        $set:{"reconcile_status":{
+            status:req.body.status,
+            date: Date()
+        }}
+    }, {safe: true, upsert: true})
+    .then((expense)=> {
+        if(expense){
+            expense.status = checkStatus(expense.approval_status.status,
+                                        expense.amount_due,
+                                        expense.total_paid,
+                                        expense.filing_status.status,
+                                        expense.filing_status.location,
+                                        req.body.status)
+            console.log(expense.status)
+            console.log(req.body.status)
+            expenseModel.findByIdAndUpdate(expense_id, {
+                $set:{status: expense.status}
+            }).then(doc => res.send(doc))
+            .catch(err => console.log(err))
+        }
+    })
+    .catch(err => console.log(err))
+})
+
+
 router.post('/expense/:id/removepayment', (req, res)=>{
     let expense_id = req.params.id
 
@@ -215,7 +245,18 @@ router.delete('/expense/:id', (req, res)=>{
             console.log(err);
         })
 })
+router.post('/expense/:id/addnote',(req,res)=>{
+    let expense_id = req.params.id
 
+    expenseModel.findByIdAndUpdate(expense_id, {
+        $push:{"notes":{
+            body:req.body.body,
+            dateCreated: req.body.date,
+            user: req.body.user
+        }}}, {safe: true, upsert: true})
+    .then(expense => res.send(expense))
+    .catch(err => console.log(err))
+})
 let getDate = () =>{
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -230,14 +271,14 @@ let checkStatus = (approval_status, expenseTotal, expenseTotalPaid, fileStatus, 
     if(approval_status == "Approved"){
         if(expenseTotal == expenseTotalPaid){
             if(fileLocation == "Customers Folder"){
-                if(recStatus == "Yes"){
+                if(recStatus == true ){
                     return "Closed"
                 } else {
                     return "Ready to Reconcile"
                 }
             }else if(fileLocation == "Missed Labor"){
                 if(missedLocation != ""){
-                    if(recStatus == "Yes"){
+                    if(recStatus == true){
                         return "Closed"
                     } else{
                         return "Ready to Reconcile"

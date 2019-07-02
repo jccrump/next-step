@@ -23,7 +23,8 @@ let expenseSchema = mongoose.Schema({
     reconcile_status: {
         status: String,
         date: String
-    }
+    },
+    notes:[]
 }, {collection: 'expenses'})
 
 let expenseModel = mongoose.model('expenses', expenseSchema);

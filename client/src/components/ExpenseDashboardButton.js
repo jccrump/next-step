@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as expenseActions from '../actions/expense.actions'
+import axios from 'axios'
 
 class ExpenseDashboardButton extends Component {
     constructor(props){
@@ -8,6 +9,12 @@ class ExpenseDashboardButton extends Component {
         this.state = {
             folder:''
         }
+    }
+    handleReconcileClick = () => {
+        axios.post(`/api/expense/${this.props.expenseID}/reconcile`,{
+            status:true
+        }).then(doc => this.props.fetchExpenses())
+        .catch(err => console.log(err))
     }
     render() {
         switch (this.props.status){
@@ -37,13 +44,13 @@ class ExpenseDashboardButton extends Component {
             case 'Ready to Reconcile':
                 return(
                     <div>
-                        <button className="addButton"><span>☑</span> Reconcile</button>
+                        <button onClick={() => this.handleReconcileClick()} className="addButton"><span>☑</span> Reconcile</button>
                     </div>
                 )
             case 'Closed':
                 return(
                     <div>
-                        Closed
+                        
                     </div>
                 )
             default:
@@ -55,7 +62,8 @@ class ExpenseDashboardButton extends Component {
 const mapDispatchToProps = {
 
         setApprovalStatus: expenseActions.setApprovalStatus,
-        setFileStatus: expenseActions.setFileStatus
+        setFileStatus: expenseActions.setFileStatus,
+        fetchExpenses : expenseActions.fetchExpenses
 
 }
 

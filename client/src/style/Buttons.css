@@ -52,6 +52,7 @@
 }
 
 .redButton{
+    margin-left: auto;
     background-color: #e85151;
     color: white;
     padding: 10px;

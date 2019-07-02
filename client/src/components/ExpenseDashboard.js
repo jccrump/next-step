@@ -5,6 +5,7 @@ import '../style/ExpenseDashboard.css'
 import ExpenseAddPayment from './ExpenseAddPayment'
 import ExpenseDashboardButton from './ExpenseDashboardButton'
 import * as expenseActions from '../actions/expense.actions'
+import ExpenseNotesList from './ExpenseNotesList'
 import axios from 'axios';
 
 
@@ -58,7 +59,7 @@ class ExpenseDashboard extends Component {
                 paymentsTotal = 0
                 payments = [
                     <tr>
-                        <td colSpan="5"><span role='img' aria-label="Money">💵</span> No payments made yet. <span role='img' aria-label="Money Bag">💰</span></td>
+                        <td colSpan="6"><span role='img' aria-label="Money">💵</span> No payments made yet. <span role='img' aria-label="Money Bag">💰</span></td>
                     </tr>
                 ]
             } else{
@@ -72,7 +73,7 @@ class ExpenseDashboard extends Component {
                             <td>{payment.type}</td>
                             <td>{payment.trans_num}</td>
                             <td>$ {parseFloat(payment.amount).toFixed(2)}</td>
-                            <td><button className="clearButton" onClick={() => this.handleRemovePaymentClick(payment.id, payment.amount, expenseData._id)}>❌</button></td>
+                            <td><button className="clearButton" onClick={() => this.handleRemovePaymentClick(payment.id, payment.amount, expenseData._id)}><span role='img' aria-label='delete'>❌</span></button></td>
                         </tr>
                     )
                 })
@@ -93,7 +94,7 @@ class ExpenseDashboard extends Component {
                             {/* Invoice Status */}
                             <h2>{expenseData.status}</h2>
                             {/* Arrpoval Satus */}
-                            <h3> Approval Status : {expenseData.approval_status.status}</h3>
+                            {/* <h3> Approval Status : {expenseData.approval_status.status}</h3> */}
                             <h3>{expenseData.filing_status.status ? `Filed in ${expenseData.filing_status.location}` : 'Not Filed'}</h3>
                             
                             <h4>Total: ${parseFloat(expenseData.amount_due).toFixed(2)}</h4>
@@ -104,21 +105,26 @@ class ExpenseDashboard extends Component {
                         </div>
                     </div>
                     {this.state.showAddPayment && <ExpenseAddPayment handleAddPaymentClick={this.handleAddPaymentClick} expenseID = {expenseData._id} />}
-                    <table className="paymentTable">
-                        <thead>
-                            <tr>
-                                <th>Payment ID</th>
-                                <th>Date</th>
-                                <th>Type</th>
-                                <th>Transaction #</th>
-                                <th>Amount</th>
-                                <th width="150"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {payments}
-                        </tbody>
-                    </table>
+                    <div className="bottomDashboard">
+                        <div className="paymentTableWrapper">
+                            <table className="paymentTable">
+                                <thead>
+                                    <tr>
+                                        <th>Payment ID</th>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Transaction #</th>
+                                        <th>Amount</th>
+                                        <th width="50"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {payments}
+                                </tbody>
+                            </table>
+                        </div>
+                        <ExpenseNotesList fetch={this.props.fetchExpenses()} expenseData={expenseData} notes={expenseData.notes}/>
+                    </div>
                     
                     
                     
