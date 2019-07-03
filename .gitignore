@@ -1,4 +1,4 @@
 .gitignore
-api/node_modules
-api/.env
+node_modules/
+.env
 client/node_modules
