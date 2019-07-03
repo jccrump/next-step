@@ -1,4 +1,0 @@
-.gitignore
-node_modules/
-.env
-client/node_modules
