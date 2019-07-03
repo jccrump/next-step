@@ -7,10 +7,10 @@ export default class ProjectExpenses extends Component {
       return(
         <Link className='projectExpense' key={expense._id} to={`/expense/${expense._id}`}>
             <div>
-              <p>{expense.type}</p>
-              <p>Vendor: {expense.vendor_id}</p>
+              <p>{expense.expenseType}</p>
+              <p>Vendor: {expense.vendorID}</p>
             </div>
-            <h4>Total Due: {expense.amount_due}</h4>      
+            <h4>Total Due: {expense.expenseTotal}</h4>      
         </Link>
       )
     })

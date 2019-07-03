@@ -21,16 +21,21 @@ export default class ExpenseNotesList extends Component {
                 </form>
             )
         } else{
-            let notes = this.props.notes.map((note)=>{
-                return(
-                    <ExpenseNote body={note.body} user={note.user} date={note.dateCreated} />
+            if(this.props.notes.length > 0){
+                let notes = this.props.notes.map((note)=>{
+                    return(
+                        <ExpenseNote body={note.body} user={note.user} date={note.dateCreated} />
+                    )
+                })
+                return (
+                    <ul className="expenseNotesList">
+                        {notes.reverse()}
+                    </ul>
                 )
-            })
-            return (
-                <ul className="expenseNotesList">
-                    {notes.reverse()}
-                </ul>
-            )
+            } else {
+                return <p>There are no notes.</p>
+            }
+            
         }
     }
     handleAddNewClick = () =>{

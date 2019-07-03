@@ -30,11 +30,11 @@ export default class ExpenseAddNew extends Component {
         e.preventDefault();
 
         let expense = {
-            project_id: this.state.project_id,
-            vendor_id: this.state.vendor_id,
-            type: this.state.type,
-            date: '',
-            amount_due: this.state.amount_due
+            projectID: this.state.project_id,
+            vendorID: this.state.vendor_id,
+            expenseType: this.state.type,
+            expenseTrade: this.state.trade,
+            expenseTotal: this.state.amount_due
         }
         
         axios.post('/api/addexpense', expense)

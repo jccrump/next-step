@@ -35,13 +35,25 @@ class InvoiceHeader extends React.Component {
             })
         }
     }
+    handleSearchChange = (e) =>{
+        let term = e.target.value
+        let expenseRows = document.getElementsByClassName('expense-table-row')
+        for(let i = 0; i < expenseRows.length; i++){
+            if(expenseRows[i].innerHTML.toLocaleLowerCase().indexOf(term.toLowerCase()) !== -1){
+                expenseRows[i].style.display = ''
+            } else {
+                expenseRows[i].style.display = 'none'
+            }
+            
+        }
+    }
     render() {
         return (
             <div>
                 <div className="search-header">
                     <h2>Expenses </h2>
                     <form>
-                        <input className="search-bar" placeholder="Find an expense..." type="text" />
+                        <input onChange={this.handleSearchChange} className="search-bar" placeholder="Find an expense..." type="text" />
                     </form>
                     <button onClick={() => this.handleNewExpenseClick()} className="addButton">Add New Expense</button>
                 </div>

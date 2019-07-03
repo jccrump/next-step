@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Expense from './Expense'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import '../style/Loading.css'
 
 
@@ -10,21 +10,43 @@ class ExpenseSortAll extends Component {
     let filteredExpenses
     if(this.props.expenses && this.props.projects && this.props.vendors){
       filteredExpenses = this.props.expenses.map((expense)=>{
-        let vendorData = this.props.vendors.filter((vendor)=> vendor['_id'] === expense.vendor_id)
-        let projectData = this.props.projects.filter((project)=> project['_id'] === expense.project_id)
+        let vendorData = this.props.vendors.filter((vendor)=> vendor['_id'] === expense.vendorID)
+        let projectData = this.props.projects.filter((project)=> project['_id'] === expense.projectID)
         if(projectData[0] !== undefined && vendorData[0] !== undefined){
-          if(expense.status == this.props.filter){
+          let transNumbers = ''
+          if(expense.expensePayments !== []){
+            expense.expensePayments.forEach((num)=>{
+              transNumbers += String(num.trans_num)
+            })
+          }
+
+          if(expense.expenseStatus === this.props.filter){
             
             return (
-              <tr>
-                <td>{expense.type}</td>
+              <tr className="expense-table-row">
+                <td>{expense.expenseType}</td>
                 <td>{projectData[0].po_num}</td>
                 <td>PM</td>
                 <td>{projectData[0].street_address}</td>
                 <td>{vendorData[0].first_name} {vendorData[0].last_name}</td>
-                <td></td>
-                <td>${parseFloat(expense.amount_due).toFixed(2)}</td>
-                <td>{expense.status}</td>
+                <td>{expense.expenseTrade}</td>
+                <td data-trans-num={transNumbers}>${parseFloat(expense.expenseTotal).toFixed(2)}</td>
+                <td>{expense.expenseStatus}</td>
+                <td><Link to={`/expense/${expense._id}`}><i class="material-icons">open_in_new</i></Link></td>
+              </tr>
+            )
+          }else if(this.props.filter === "All"){
+            return(
+              <tr className="expense-table-row">
+                <td>{expense.expenseType}</td>
+                <td>{projectData[0].po_num}</td>
+                <td>PM</td>
+                <td>{projectData[0].street_address}</td>
+                <td>{vendorData[0].first_name} {vendorData[0].last_name}</td>
+                <td>{expense.expenseTrade}</td>
+                <td data-trans-num={transNumbers}>${parseFloat(expense.expenseTotal).toFixed(2)}</td>
+                <td>{expense.expenseStatus}</td>
+                <td><Link to={`/expense/${expense._id}`}><i class="material-icons">open_in_new</i></Link></td>
               </tr>
             )
           } else {
@@ -32,7 +54,6 @@ class ExpenseSortAll extends Component {
           }
         }
       }) 
-      console.log(filteredExpenses)
     }
     
     return(

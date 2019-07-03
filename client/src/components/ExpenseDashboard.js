@@ -52,10 +52,10 @@ class ExpenseDashboard extends Component {
         let expenseData, vendorData, projectData, paymentAmounts, paymentsTotal, payments
         try {
             expenseData = this.props.expenses.filter((expense) => expense._id === this.props.match.params.id)[0]
-            vendorData = this.props.vendors.filter((vendor=> vendor._id === expenseData.vendor_id))[0]
-            projectData = this.props.projects.filter((project) => project._id === expenseData.project_id)[0]
+            vendorData = this.props.vendors.filter((vendor=> vendor._id === expenseData.vendorID))[0]
+            projectData = this.props.projects.filter((project) => project._id === expenseData.projectID)[0]
             
-            if((expenseData.payments).length === 0){
+            if((expenseData.expensePayments).length === 0){
                 paymentsTotal = 0
                 payments = [
                     <tr>
@@ -63,9 +63,9 @@ class ExpenseDashboard extends Component {
                     </tr>
                 ]
             } else{
-                paymentAmounts = expenseData.payments.map((payment) => payment.amount)
+                paymentAmounts = expenseData.expensePayments.map((payment) => payment.amount)
                 paymentsTotal = paymentAmounts.reduce((total, payment)=> total + payment)
-                payments = expenseData.payments.map((payment) => {
+                payments = expenseData.expensePayments.map((payment) => {
                     return (
                         <tr key={payment.id}>
                             <td>{payment.id}</td>
@@ -88,18 +88,18 @@ class ExpenseDashboard extends Component {
                             <h3>PO#: {projectData.po_num}</h3>
                             <h3>{vendorData.first_name} {vendorData.last_name}</h3>
                             <h3>{projectData.street_address}</h3>
-                            <ExpenseDashboardButton approvalStatus={expenseData.approval_status.status} expenseID={expenseData._id} handleAddPaymentClick={this.handleAddPaymentClick} status={expenseData.status}/>
+                            <ExpenseDashboardButton approvalStatus={expenseData.approvalStatus.status} expenseID={expenseData._id} handleAddPaymentClick={this.handleAddPaymentClick} status={expenseData.expenseStatus}/>
                         </div>
                         <div className='topRightDashboard'>
                             {/* Invoice Status */}
-                            <h2>{expenseData.status}</h2>
+                            <h2>{expenseData.expenseStatus}</h2>
                             {/* Arrpoval Satus */}
                             {/* <h3> Approval Status : {expenseData.approval_status.status}</h3> */}
-                            <h3>{expenseData.filing_status.status ? `Filed in ${expenseData.filing_status.location}` : 'Not Filed'}</h3>
+                            <h3>{expenseData.filingStatus.status ? `Filed in ${expenseData.filingStatus.location}` : 'Not Filed'}</h3>
                             
-                            <h4>Total: ${parseFloat(expenseData.amount_due).toFixed(2)}</h4>
+                            <h4>Total: ${parseFloat(expenseData.expenseTotal).toFixed(2)}</h4>
                             <h4>Payments: ${parseFloat(paymentsTotal).toFixed(2)}</h4>
-                            <h4>Balance: ${(parseFloat(expenseData.amount_due).toFixed(2) - parseFloat(paymentsTotal).toFixed(2)).toFixed(2)}</h4>
+                            <h4>Balance: ${(parseFloat(expenseData.expenseTotal).toFixed(2) - parseFloat(paymentsTotal).toFixed(2)).toFixed(2)}</h4>
                             
                             
                         </div>
