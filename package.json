@@ -1,0 +1,23 @@
+{
+  "name": "next-step",
+  "version": "1.0.0",
+  "description": "CRM System",
+  "main": "index.js",
+  "scripts": {
+    "install": "(cd client && npm) && (cd server && npm)",
+    "start": "concurrently \"cd client && npm start\" \"cd api && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jccrump/next-step.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jccrump/next-step/issues"
+  },
+  "homepage": "https://github.com/jccrump/next-step#readme",
+  "dependencies": {
+    "concurrently": "^4.1.1"
+  }
+}
